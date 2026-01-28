@@ -28,16 +28,23 @@
                         <button class="delete-btn" (click)="onDeleteBrand(brand.id)">Delete</button>
                         <button class="edit-btn" (click)="onEditBrand(brand)" >Edit</button>
                     </div>
+                    @if(selectedBrandId() === brand.id && screen()){
+                        <form [formGroup]="form"  >
+                            <label for="name">New Name</label>
+                            <input type="name"  name="name" id="name" formControlName="editedName">
+                            <button class="edit-btn" type="submit" (click)="onSubmitEditedBrand()">Submit</button>
+                        </form>
+            }
             }
 
 
-            @if(screen()){
+            <!-- @if(screen()){
                 <form [formGroup]="form"  >
                     <label for="name">New Name</label>
                     <input type="name"  name="name" id="name" formControlName="editedName">
                     <button type="submit" (click)="onSubmitEditedBrand()">Submit</button>
                 </form>
-            }
+            } -->
             </ul>
         }
         </div>
