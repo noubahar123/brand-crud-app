@@ -1,0 +1,38 @@
+
+<div class="brand-bold">
+    <h1>Brands</h1>
+</div>
+
+
+
+<div class="main-flex-board">
+    <div class="flex-card">
+        <app-new-brand (brandName)="getBrandName($event)" />
+
+        <h2>Brand Name: {{myBrand()}}</h2>
+    </div>
+
+    <div class="flex-card">
+        <h2>All Brands</h2>
+        <ul>
+            @for(brand of allBrands(); track brand.id){
+                <li>{{brand.name}}</li>
+                <button (click)="onDeleteBrand(brand.id)">Delete</button>
+                <button (click)="onEditBrand(brand.id)" >Edit</button>
+                @if(screen()){
+                    <form formGroupName="form">
+                        <label for="name">New Name</label>
+                        <input type="name"  name="name" id="name" formControlName="editedName">
+                        <button (click)="onSubmit()">Sumit</button>
+                    </form>
+                }
+        }
+        </ul>
+    </div>
+
+</div>
+
+
+
+
+

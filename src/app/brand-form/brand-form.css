@@ -1,0 +1,52 @@
+.brand-bold {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  text-align: center;
+}
+
+.brand-bold h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.main-flex-board {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+
+/* Cards */
+.flex-card {
+  flex: 1;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.flex-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: #111827;
+}
+
+
+/* Buttons */
+button {
+  padding: 0.45rem 0.8rem;
+  margin-left: 0.4rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+/* Button variants */
+button:hover {
+  opacity: 0.9;
+}
