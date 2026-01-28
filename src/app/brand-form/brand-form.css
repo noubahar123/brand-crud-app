@@ -28,6 +28,29 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
+.brand-flex-card{
+  flex: 1;
+  background: #ffffff;
+  padding: 1.5rem;
+  margin: 1rem;
+  border-radius: 12px;
+  border: 1px solid black;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+}
+
+.brand-flex-card:hover {
+  flex: 1;
+  background: #ffffff;
+  padding: 1.5rem;
+  margin: 1rem;
+  border-radius: 12px;
+  border: 1px solid black;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transform: scale(1.1);
+
+}
+
 .flex-card h2 {
   margin-bottom: 1rem;
   font-size: 1.3rem;
@@ -38,15 +61,46 @@
 /* Buttons */
 button {
   padding: 0.45rem 0.8rem;
-  margin-left: 0.4rem;
+  margin: 0.4rem;
+  /* margin-left: 0.4rem; */
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.85rem;
   transition: all 0.2s ease;
+  border-radius: 20px;
 }
 
 /* Button variants */
 button:hover {
   opacity: 0.9;
 }
+
+.edit-btn:hover {
+  background-color: darkorange;
+}
+
+.delete-btn:hover {
+  background-color: green
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: #FF3D00;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: 40%;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
