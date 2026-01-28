@@ -5,9 +5,11 @@
     <h2>Add Brand</h2>
 
     <div>
-        <label for="brand-name">Brand Name</label>
+        <label for="brand-name">Enter Brand Name</label>
         <input type="text" id="brand-name" name="brand-name" formControlName="name">
-        <button type="remove" (click)="onRemove()">Remove</button>
+
+        <button type="remove" class="remove-btn" (click)="onRemove()">Remove</button>
+        <button type="submit" class="submit-btn" (click)="onSubmit()">Submit</button>
 
     </div>
 
@@ -17,7 +19,7 @@
 
 
     <!-- <input type="image" id="brand-img" name="brand-img" formControlName="img" /> -->
-     <button type="submit" (click)="onSubmit()">Submit</button>
+     
 
 
     </form>

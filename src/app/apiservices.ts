@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
+import { Brand, BrandResponse } from './brand.model';
 
 
 
@@ -16,8 +17,8 @@ export class Apiservices {
   httpClient = inject(HttpClient)
 
 
-  getBrands(): Observable<any> {
-    return this.httpClient.get(`https://devapi.hyperinvento.com/v1/companies/${this.COMPANY_ID}/brands`)
+  getBrands(): Observable<BrandResponse> {
+    return this.httpClient.get<BrandResponse>(`https://devapi.hyperinvento.com/v1/companies/${this.COMPANY_ID}/brands`)
   }
 
   postBrand(brandName: string) {

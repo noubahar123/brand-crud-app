@@ -4,6 +4,7 @@ import { Apiservices } from '../apiservices';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
 import { ɵInternalFormsSharedModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
+import { Brand } from '../brand.model';
 
 // const INITIAL_RESPONSE: BrandResponse = {
 //   count: 0,
@@ -20,9 +21,9 @@ import { ɵInternalFormsSharedModule, ReactiveFormsModule, FormGroup, FormContro
   styleUrl: './brand-form.css',
 })
 export class BrandForm implements OnInit {
-  myBrand = signal('')
+  myBrand = signal<string>('')
   apiServices = inject(Apiservices)
-  allBrands = signal<any[]>([])
+  allBrands = signal<Brand[]>([])
   screen = signal(false)
   loading = signal(false)
   buttonloading = signal(true)
@@ -71,6 +72,7 @@ export class BrandForm implements OnInit {
       .pipe(
         map(response => {
           this.loading.set(false)
+          console.log(response)
           this.allBrands.set(response?.results)
           return response
         })
@@ -85,9 +87,15 @@ export class BrandForm implements OnInit {
 
 
 
-  getBrandName(value: { name: string }) {
-    this.myBrand.set(value.name)
-    this.apiServices.postBrand(this.myBrand()).subscribe()
+  getBrandName(value: string) {
+    this.myBrand.set(value)
+    this.apiServices.postBrand(this.myBrand()).subscribe({
+      next: (value) => {
+        this.fetchAllbrands()
+        console.log("New brand added")
+      }
+    })
+
   }
 
   onDeleteBrand(id: string) {
@@ -103,7 +111,7 @@ export class BrandForm implements OnInit {
     })
   }
 
-  onEditBrand(brand: any) {
+  onEditBrand(brand: Brand) {
     this.screen.update((value) => !value)
     this.form.controls.editedName.setValue(brand.name);
     this.selectedBrandId.set(brand.id)

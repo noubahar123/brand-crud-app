@@ -8,7 +8,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
   styleUrl: './new-brand.css',
 })
 export class NewBrand {
-  @Output() brandName = new EventEmitter()
+  @Output() brandName = new EventEmitter<string>()
+
   brandVisible = signal(false)
 
 
@@ -16,6 +17,7 @@ export class NewBrand {
 
   form = new FormGroup({
     name: new FormControl('', {
+      nonNullable: true,
       validators: [Validators.required]
     })
 
@@ -24,7 +26,10 @@ export class NewBrand {
 
 
   onSubmit() {
-    this.brandName.emit(this.form.value)
+    const name = this.form.controls.name.value
+
+
+    this.brandName.emit(name)
     this.brandVisible.update((value) => !value)
   }
 
