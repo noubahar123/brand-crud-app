@@ -32,7 +32,11 @@
                         <form [formGroup]="form"  >
                             <label for="name">New Name</label>
                             <input type="name"  name="name" id="name" formControlName="editedName">
-                            <button class="edit-btn" type="submit" (click)="onSubmitEditedBrand()">Submit</button>
+                            <button class="edit-btn" type="submit" (click)="onSubmitEditedBrand()">Submit</button>  
+                            @if(form.controls.editedName.hasError('required') && 
+                            (form.controls.editedName.dirty || form.controls.editedName.touched)){ 
+                                <div><p>Enter proper value</p></div>
+                            }
                         </form>
             }
             }

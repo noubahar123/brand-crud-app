@@ -28,10 +28,20 @@ export class BrandForm implements OnInit {
   loading = signal(false)
   buttonloading = signal(true)
 
+  editErrorMessage = signal<string>('')
+  fetchErrorMessage = signal<string>('')
+  deleteErrorMessage = signal<string>('')
+  addErrorMessage = signal<string>('')
+
+
+
+
 
   form = new FormGroup({
     editedName: new FormControl('', {
+      nonNullable: true,
       validators: [Validators.required]
+
     })
   })
   selectedBrandId = signal<string | null>(null)
@@ -76,7 +86,13 @@ export class BrandForm implements OnInit {
           this.allBrands.set(response?.results)
           return response
         })
-      ).subscribe()
+      ).subscribe({
+        error: (error) => {
+          this.loading.set(false)
+          console.log("Error occured while fetching", error)
+          window.alert("Error occured while fetching")
+        }
+      })
 
 
   }
@@ -93,6 +109,12 @@ export class BrandForm implements OnInit {
       next: (value) => {
         this.fetchAllbrands()
         console.log("New brand added")
+      },
+      error: (error) => {
+        this.loading.set(false)
+        window.alert("Error while posting listing")
+        console.log("Error occur while posting ", + error)
+
       }
     })
 
@@ -106,7 +128,9 @@ export class BrandForm implements OnInit {
 
       },
       error: (err) => {
-        console.log(err)
+        this.loading.set(false)
+        window.alert("Error occured while deleting Brand")
+        console.log("Error occured while deleting Brand", err)
       }
     })
   }
@@ -124,6 +148,7 @@ export class BrandForm implements OnInit {
 
     if (!brandId || !editedName) {
       console.log("Missing BrandId or BrandName")
+      this.editErrorMessage.set("Add Missing Values")
       return;
     }
 
@@ -135,6 +160,8 @@ export class BrandForm implements OnInit {
         console.log(resp)
       },
       error: (err) => {
+        this.loading.set(false)
+        window.alert("Error while Editing Brand")
         console.log(err)
       }
     })

@@ -11,6 +11,9 @@
         <button type="remove" class="remove-btn" (click)="onRemove()">Remove</button>
         <button type="submit" class="submit-btn" (click)="onSubmit()">Submit</button>
 
+        @if(form.controls.name.hasError('required') && (form.controls.name.dirty || form.controls.name.touched)){
+            <div><p>Enter the name</p></div>
+        }
     </div>
 
 

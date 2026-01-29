@@ -13,7 +13,7 @@ import { Brand, BrandResponse } from './brand.model';
 export class Apiservices {
 
   ACCESS_TOKEN = "efPz790Rm0fJLOSWd0CK6fV4DYwsKN"
-  COMPANY_ID = "b11b0815-26b2-444c-a176-d040909eb3cd"
+  COMPANY_ID = "b11b0815-26b2-444c-a176-d040909eb3cd"      //
   httpClient = inject(HttpClient)
 
 
@@ -22,7 +22,7 @@ export class Apiservices {
   }
 
   postBrand(brandName: string) {
-    return this.httpClient.post('https://devapi.hyperinvento.com/v1/companies/b11b0815-26b2-444c-a176-d040909eb3cd/brands', {
+    return this.httpClient.post(`https://devapi.hyperinvento.com/v1/companies/${this.COMPANY_ID}/brands`, {
       name: brandName
     })
   }
