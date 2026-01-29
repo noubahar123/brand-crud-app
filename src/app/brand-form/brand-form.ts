@@ -155,7 +155,7 @@ export class BrandForm implements OnInit {
         this.loading.set(false)
         // window.alert("Error occured while deleting Brand")
         // console.log("Error occured while deleting Brand", err)
-        this.toastr.error("Error while adding brand", "Failed To Add", {
+        this.toastr.error("Error while Deleting brand", "Failed To Delete", {
           closeButton: true
         })
       }
