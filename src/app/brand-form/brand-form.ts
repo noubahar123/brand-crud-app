@@ -170,6 +170,11 @@ export class BrandForm implements OnInit {
 
   }
 
+  cancelEdit() {
+    this.screen.update((value) => !value)
+
+  }
+
   onSubmitEditedBrand() {
     const brandId = this.selectedBrandId()
     const editedName = this.form.value.editedName
