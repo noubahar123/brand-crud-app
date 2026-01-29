@@ -68,6 +68,15 @@ button {
     background-color: green;
 }
 
+.error-template p {
+    color: red;
+    align-self: center;
+}
+
+.error-value {
+    text-decoration: underline;
+}
+
 
 
 

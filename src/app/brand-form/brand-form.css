@@ -27,6 +27,14 @@
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
+.flex-card-2 {
+  flex: 1;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
 
 .brand-flex-card{
   flex: 1;
@@ -104,3 +112,12 @@ button:hover {
         transform: rotate(360deg);
     }
     } 
+
+.error-template p {
+    color: red;
+    align-self: center;
+}
+
+.error-value {
+    text-decoration: underline;
+}

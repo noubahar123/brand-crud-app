@@ -5,6 +5,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
 import { ɵInternalFormsSharedModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from "@angular/forms";
 import { Brand } from '../brand.model';
+import { ToastrService } from 'ngx-toastr';
 
 // const INITIAL_RESPONSE: BrandResponse = {
 //   count: 0,
@@ -32,6 +33,10 @@ export class BrandForm implements OnInit {
   fetchErrorMessage = signal<string>('')
   deleteErrorMessage = signal<string>('')
   addErrorMessage = signal<string>('')
+
+  // Toaster 
+  toastr = inject(ToastrService)
+  formError = signal(false)
 
 
 
@@ -87,10 +92,19 @@ export class BrandForm implements OnInit {
           return response
         })
       ).subscribe({
+        next: (next) => {
+          this.toastr.success("Brands fetched successfully", "Success", {
+            closeButton: true,
+            timeOut: 2000
+          })
+        },
         error: (error) => {
           this.loading.set(false)
-          console.log("Error occured while fetching", error)
-          window.alert("Error occured while fetching")
+          // console.log("Error occured while fetching", error)
+          // window.alert("Error occured while fetching")
+          this.toastr.error("Error occured while Fetching", "Error", {
+            closeButton: true
+          })
         }
       })
 
@@ -108,12 +122,18 @@ export class BrandForm implements OnInit {
     this.apiServices.postBrand(this.myBrand()).subscribe({
       next: (value) => {
         this.fetchAllbrands()
-        console.log("New brand added")
+        // console.log("New brand added")
+        this.toastr.success("Brand successfully added", "Brand Added", {
+          closeButton: true
+        })
       },
       error: (error) => {
         this.loading.set(false)
-        window.alert("Error while posting listing")
-        console.log("Error occur while posting ", + error)
+        // window.alert("Error while posting listing")
+        // console.log("Error occur while posting ", + error)
+        this.toastr.error("An error Occured added while adding brand", "Failed", {
+          closeButton: true
+        })
 
       }
     })
@@ -123,14 +143,21 @@ export class BrandForm implements OnInit {
   onDeleteBrand(id: string) {
     this.apiServices.removeBrand(id).subscribe({
       next: (resp) => {
-        console.log(resp)
+        // console.log(resp)
         this.fetchAllbrands()
+        this.toastr.success("Brand deleted successful", "Brand Deleted", {
+          closeButton: true,
+
+        })
 
       },
       error: (err) => {
         this.loading.set(false)
-        window.alert("Error occured while deleting Brand")
-        console.log("Error occured while deleting Brand", err)
+        // window.alert("Error occured while deleting Brand")
+        // console.log("Error occured while deleting Brand", err)
+        this.toastr.error("Error while adding brand", "Failed To Add", {
+          closeButton: true
+        })
       }
     })
   }
@@ -139,7 +166,8 @@ export class BrandForm implements OnInit {
     this.screen.update((value) => !value)
     this.form.controls.editedName.setValue(brand.name);
     this.selectedBrandId.set(brand.id)
-    console.log(this.selectedBrandId())
+    // console.log(this.selectedBrandId())
+
   }
 
   onSubmitEditedBrand() {
@@ -147,8 +175,11 @@ export class BrandForm implements OnInit {
     const editedName = this.form.value.editedName
 
     if (!brandId || !editedName) {
-      console.log("Missing BrandId or BrandName")
-      this.editErrorMessage.set("Add Missing Values")
+      // console.log("Missing BrandId or BrandName")
+      // this.editErrorMessage.set("Add Missing Values")
+      this.toastr.error("Missing Brand Values", "Add Value", {
+        closeButton: true
+      })
       return;
     }
 
@@ -156,13 +187,20 @@ export class BrandForm implements OnInit {
     console.log(this.form.value.editedName)
     this.apiServices.editBrand(brandId, editedName).subscribe({
       next: (resp) => {
+        this.toastr.success("Brand updated successfully", "Brand Updated", {
+          closeButton: true
+        })
         this.fetchAllbrands()
-        console.log(resp)
+        // console.log(resp)
+
       },
       error: (err) => {
         this.loading.set(false)
-        window.alert("Error while Editing Brand")
-        console.log(err)
+        // window.alert("Error while Editing Brand")
+        // console.log(err)
+        this.toastr.error("Failed while updating the brand", "Failed", {
+          closeButton: true
+        })
       }
     })
   }

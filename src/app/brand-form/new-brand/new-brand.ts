@@ -11,6 +11,7 @@ export class NewBrand {
   @Output() brandName = new EventEmitter<string>()
 
   brandVisible = signal(false)
+  errorOccured = signal(false)
 
 
 
@@ -26,6 +27,11 @@ export class NewBrand {
 
 
   onSubmit() {
+    if (this.form.invalid) {
+      this.errorOccured.set(true)
+      return;
+
+    }
     const name = this.form.controls.name.value
 
 
